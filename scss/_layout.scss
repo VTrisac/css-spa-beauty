@@ -1,0 +1,207 @@
+// Fondo partido: crema a la izquierda, verde a la derecha y blanco abajo
+.header,
+.hero {
+  position: relative;
+}
+
+body {
+  background:
+    linear-gradient(to right, $cream $split, $teal $split) top / 100% 818px no-repeat,
+    $white;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  max-width: $container;
+  margin: 0 auto;
+  padding: 1.75rem 1.25rem;
+
+  &__logo {
+    font-size: 1.85rem;
+    font-weight: 600;
+    color: $navy;
+    text-decoration: none;
+    span { color: $teal; }
+  }
+
+  &__links {
+    display: flex;
+    gap: 3.4rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 4rem;
+
+    a {
+      position: relative;
+      font-size: .98rem;
+      color: $navy;
+      text-decoration: none;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 2px;
+        background: $teal;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform .2s;
+      }
+      &:hover::after { transform: scaleX(1); }
+    }
+  }
+
+  &__more { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    .icon-btn + .icon-btn { margin-left: -.8rem; }
+    .btn { padding: 1rem 2.1rem; }
+  }
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 56%) minmax(0, 44%);
+  max-width: $container;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+
+  &__bg {
+    position: absolute;
+    inset: -7rem 0 auto;
+    pointer-events: none;
+  }
+
+  &__leaf {
+    position: absolute;
+    top: 6.5rem;
+    left: 71%;
+    width: 17rem;
+    color: rgba(#86c2b3, .55);
+  }
+
+  &__content { position: relative; z-index: 2; padding-top: 1rem; }
+
+  &__title {
+    margin: 0 0 4.6rem;
+    max-width: 56rem;
+    font-size: clamp(2.4rem, 3.5vw, 4.15rem);
+    font-weight: 600;
+    line-height: 1.2;
+    color: $navy;
+    letter-spacing: -.01em;
+  }
+
+  &__text {
+    max-width: 48rem;
+    margin: 0 0 3.6rem;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: $grey;
+  }
+
+  &__cta { display: flex; align-items: center; gap: 2.8rem; }
+
+  &__media {
+    position: static;
+    margin: -.5rem 0 0 -14rem;
+  }
+
+  &__model {
+    position: relative;
+    z-index: 1;
+    width: 49rem;
+    max-width: none;
+    // La foto se funde con el blanco por abajo, como en el diseño
+    -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent);
+    mask-image: linear-gradient(to bottom, #000 82%, transparent);
+  }
+}
+
+.watch {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 1rem;
+  color: $navy;
+  text-decoration: none;
+
+  &__play {
+    display: grid;
+    place-items: center;
+    width: 3.6rem;
+    height: 3.6rem;
+    padding-left: 3px;
+    border-radius: 50%;
+    background: $white;
+    color: $navy;
+    box-shadow: 0 14px 30px rgba(#000, .08);
+    transition: transform .2s, background-color .2s, color .2s;
+  }
+  &:hover &__play { transform: scale(1.08); background: $navy; color: $white; }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 40rem;
+  margin-top: 6rem;
+  padding: 2rem 1rem 2.4rem;
+  background: rgba($white, .9);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(#000, .04);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: 1.6rem;
+    border-radius: 50%;
+    background: $teal;
+    color: $navy;
+    box-shadow: 0 10px 22px rgba($teal, .55);
+    svg { width: 2.2rem; height: 2.2rem; }
+  }
+
+  &__value { font-size: 2.1rem; font-weight: 500; color: $navy; }
+  &__label { max-width: 8rem; margin-top: 1rem; font-size: 1.1rem; line-height: 1.5; color: $grey; }
+  &__label--strong { font-weight: 600; }
+}
+
+.quote {
+  position: absolute;
+  z-index: 2;
+  width: 25.5rem;
+  margin: 0;
+  padding: 1.4rem 1.4rem 1.3rem;
+  background: rgba($teal-light, .78);
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+  transition: transform .25s, box-shadow .25s;
+
+  &:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba($navy, .12); }
+
+  // Posiciones medidas sobre el diseño de 1920px, relativas al bloque .hero
+  &--top { top: 20.4rem; right: -5.8rem; }
+  &--bottom { top: 39.6rem; right: 2.9rem; background: rgba($white, .78); }
+
+  &__mark { color: $navy; }
+
+  p { margin: .6rem 0 .8rem; font-size: 1.05rem; line-height: 1.6; color: $text; }
+  cite { font-style: normal; font-weight: 700; color: $navy; }
+}
